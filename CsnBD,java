@@ -1,0 +1,313 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+
+
+public class CsnBD {
+    public static void main(String[] args) throws SQLException {
+        // Criação da tabela aluno
+        /*String SQLcriarTabela = "CREATE TABLE aluno (" +
+                "matricula VARCHAR(12) PRIMARY KEY, " +
+                "nome VARCHAR(100), " +
+                "ano_escolar VARCHAR(20), " +
+                "nota1 DECIMAL(3,1), " +
+                "nota2 DECIMAL(3,1), " +
+                "nota3 DECIMAL(3,1), " +
+                "nota4 DECIMAL(3,1)" +
+                ")";*/
+        // Fim da criação tabela aluno
+        
+        /*String SQLInserirAluno = "INSERT INTO aluno (matricula, nome, ano_escolar, nota1, nota2, nota3, nota4) VALUES " +
+                "('2024567546', 'João Silva', 'JARDIM 1', 8.5, 9.0, 7.5, 9.5), " +
+                "('1465566456', 'Diego Ramos','JARDIM 1', 8.5, 9.0, 7.5, 9.5), " +
+                "('1202020456', 'Diego DELETE','JARDIM 1', 8.5, 9.0, 7.5, 9.5), " +
+                "('1299567893', 'Vitória Rocha', 'JARDIM 1', 8.5, 9.0, 7.5, 9.5), " +
+                "('1202407894', 'Gustavo Costa', 'JARDIM 1', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234520205', 'Mariana Albuquerque', 'JARDIM 1', 8.5, 9.0, 7.5, 9.5), " +
+                "('1212567896', 'Fernanda Costa', 'JARDIM 1', 8.5, 9.0, 7.5, 9.5), " + 
+                "('5668787897', 'Anderson Oliveira', 'JARDIM 1', 8.5, 9.0, 7.5, 9.5), " + 
+                "('1236567898', 'Júlia Castro','JARDIM 1', 8.5, 9.0, 7.5, 9.5), " + 
+                "('1294567899', 'Victor Lima', 'JARDIM 1', 8.5, 9.0, 7.5, 9.5), " + 
+                "('2023578910', 'Luiza Ferreira', 'JARDIM 1', 8.5, 9.0, 7.5, 9.5), " + 
+                "('2023456711', 'Leonardo Martins', 'JARDIM 2', 8.5, 9.0, 7.5, 9.5), " + 
+                "('2023345912', 'Rafaela Barbosa','JARDIM 2', 8.5, 9.0, 7.5, 9.5), " +
+                "('2023567913', 'Isabella Santos', 'JARDIM 2', 8.5, 9.0, 7.5, 9.5), " +
+                "('2023567914', 'Matheus Souza', 'JARDIM 2', 8.5, 9.0, 7.5, 9.5), " +
+                "('2023567815', 'Beatriz Cardoso', 'JARDIM 2', 8.5, 9.0, 7.5, 9.5), " +
+                "('2023568916', 'Lucas Ribeiro', 'JARDIM 2', 8.5, 9.0, 7.5, 9.5), " +
+                "('2023578900', 'Sofia Carvalho', 'JARDIM 2', 8.5, 9.0, 7.5, 9.5), " +
+                "('2023678917', 'Gabriel Pereira', 'JARDIM 2', 8.5, 9.0, 7.5, 9.5), " +
+                "('2025678918', 'Camila Gomes','JARDIM 2', 8.5, 9.0, 7.5, 9.5), " +
+                "('2023679019', 'Guilherme Almeida', 'JARDIM 2', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234568920', 'Laura Costa', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234567891', 'Carlos Fernandes', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578922', 'Ana Rodrigues', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578923', 'Pedro Santos', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578924', 'Maria Oliveira', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234678925', 'André Moreira', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578926', 'Letícia Ferreira', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234678927', 'Eduardo Lima', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234568928', 'Mariana Oliveira', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234678929', 'Bruno Santos', 'JARDIM 3', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578930', 'Amanda Rodrigues', '1º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578931', 'Felipe Costa', '1º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578932', 'Carolina Silva', '1º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1235678933', 'Thiago Almeida', '1º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1235678934', 'Luana Pereira', '1º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1245678935', 'Gabriel Ribeiro','1º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234568936', 'Isabela Cardoso', '1º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578937', 'Rafael Souza', '1º ANO', 8.5, 9.0, 5.5, 9.5), " +
+                "('1245678938', 'Manuela Santos', '1º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1345678939', 'Gustavo Barbosa', '1º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1245678940', 'Camila Martins', '2º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1235678941', 'Lucas Ferreira', '2º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234568942', 'Larissa Lima', '2º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578143', 'Matheus Castro', '2º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234678944', 'Julia Oliveira', '2º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578945', 'Ricardo Costa', '2º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234568946', 'Sofia Lima', '2º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234678947', 'Henrique Silva', '2º ANO', 8.5, 9.0, 5.5, 9.5), " +
+                "('1234578948', 'Giovanna Castro', '2º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578949', 'Marcelo Oliveira', '2º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578950', 'Valentina Almeida', '3º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578951', 'Pedro Barbosa', '3º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1245678952', 'Beatriz Costa', '3º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234567953', 'Vinicius Santos', '3º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234678954', 'Alice Pereira', '3º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345678955', 'Daniel Ribeiro', '3º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234567956', 'Gabriela Cardoso', '3º ANO', 8.5, 5.0, 7.5, 9.5), " +
+                "('1235678957', 'Marcos Souza', '3º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234578958', 'Laura Martins', '3º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1245678959', 'Guilherme Ferreira', '3º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('2345678960', 'Giovana Lima', '4º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1235678961', 'Bruno Castro', '4º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('1234567892', 'Rafaela Oliveirae','4º ANO',8.5, 9.0, 7.5, 9.5), " +
+                "('13456789163', 'Lucas Costa','4º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789164', 'Júlia Almeida','4º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12456789165', 'Thiago Barbosa', '4º ANO', 8.5, 4.0, 7.5, 9.5), " +
+                "('12346789166', 'Mariana Santos', '4º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('13456789167', 'Gabriel Oliveira', '4º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('23456789168', 'Amanda Ferreira', '4º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345679169', 'Leonardo Silva', '4º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345689170', 'Letícia Lima', '5º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345679171', 'Eduardo Castro', '5º ANO', 8.5, 1.0, 7.5, 9.5), " +
+                "('12345678172', 'Isabela Costa', '5º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12456719173', 'Felipe Santos', '5º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789174', 'Carolina Martins','5º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345679175', 'Vinicius Ferreira', '5º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345678976', 'Luana Lima', '5º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345689177', 'Henrique Barbosa', '5º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345789178', 'Giovanna Costa', '5º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12567891790', 'Marcelo Almeida','5º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345789180', 'Valentina Castro', '6º ANO', 8.5, 3.0, 7.5, 9.5), " +
+                "('12345789181', 'Marcos Oliveira', '6º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('13456789182', 'Laura Almeida', '6º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345678183', 'Gustavo Barbosa', '6º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345679184', 'Alice Santos', '6º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('13456789185', 'Daniel Ribeiro', '6º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345789186', 'Gabriela Cardoso','6º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345679187', 'Rafael Souza', '6º ANO', 8.5, 9.0, 7.5, 4.5), " +
+                "('12345789188', 'Manuela Lima', '6º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12567890189', 'Bruno Castro', '6º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12456789190', 'Amanda Costa', '7º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345689191', 'Lucas Silva', '7º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345689192', 'Júlia Oliveira', '7º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789193', 'Thiago Costa', '7º ANO', 8.5, 9.0, 2.0, 9.5), " +
+                "('12346789194', 'Mariana Ferreira', '7º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789195', 'Gabriel Oliveira', '7º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345789196', 'Letícia Lima', '7º ANO', 8.5, 5.5, 7.5, 9.5), " +
+                "('12345789197', 'Eduardo Castro', '7º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12456789198', 'Isabela Costa', '7º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12456789199', 'Felipe Santos', '7º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356708900', 'Carolina Martins', '8º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789201', 'Vinicius Ferreira', '8º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789202', 'Luana Lima', '8º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789203', 'Henrique Barbosa', '8º ANO', 4.5, 9.0, 7.5, 9.5), " +
+                "('13456789204', 'Giovanna Costa', '8º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12456789205', 'Marcelo Almeida', '8º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345679206', 'Valentina Castro', '8º ANO', 8.5, 9.0, 3.5, 9.5), " +
+                "('13456789207', 'Marcos Oliveira', '8º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789208', 'Laura Almeida', '8º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789209', 'Gustavo Barbosa', '8º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789210', 'Alice Santos', '9º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789211', 'Daniel Ribeiro', '9º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789212', 'Gabriela Cardoso','9º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12456789213', 'Rafael Souza', '9º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12456789214', 'Manuela Lima', '9º ANO', 5.0, 9.0, 7.5, 9.5), " +
+                "('12456789215', 'Bruno Castro', '9º ANO', 3.5, 9.0, 7.5, 9.5), " +
+                "('12345678926', 'Amanda Costa', '9º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789217', 'Lucas Silva', '9º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345679218', 'Júlia Oliveira', '9º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789219', 'Thiago Costa', '9º ANO', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789220', 'Gabriel Oliveira', '1º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789221', 'Letícia Lima', '1º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789222', 'Eduardo Castro', '1º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789223', 'Isabela Costa', '1º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789224', 'Felipe Santos', '1º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('13456789225', 'Carolina Martins', '1º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('13456789226', 'Vinicius Ferreira', '1º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789227', 'Luana Lima','1º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('14567892280', 'Henrique Barbosa', '1º ANO EM', 4.5, 9.0, 7.5, 9.5), " +
+                "('12345789129', 'Giovanna Costa', '1º ANO EM', 5.5, 9.0, 7.5, 9.5), " +
+                "('12345678930', 'Marcelo Almeida', '2º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345789231', 'Valentina Castro', '2º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789232', 'Marcos Oliveira','2º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12356789233', 'Laura Almeida', '2º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345689234', 'Gustavo Barbosa', '2º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789235', 'Alice Santos', '2º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345789236', 'Daniel Ribeiro', '2º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789237', 'Gabriela Cardoso', '2º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789238', 'Larissa Gonçalves', '2º ANO EM', 3.5, 9.0, 7.5, 9.5), " +
+                "('13456789239', 'Gustavo Pereira', '2º ANO EM', 2.0, 9.0, 7.5, 9.5), " +
+                "('12456789240', 'Camila Lima', '3º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12456789241', 'Matheus Almeida', '3º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789242', 'Rafaela Costa', '3º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12346789243', 'Gabriela Rodrigues', '3º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345789244', 'Lucas Ferreira', '3º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345689245', 'Ana Souza', '3º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345689246', 'Pedro Santos', '3º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345789247', 'Maria Oliveira', '3º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
+                "('12345689248', 'João da Silva', '3º ANO EM', 4.5, 9.0, 7.5, 9.5), " +
+                "('98765212249', 'Maria Santos', '3º ANO EM', 3.0, 6.5, 8.0, 7.5)";*/
+                
+                //atualizar dados
+                //String SQLatualizarDados = "UPDATE aluno SET nota1 = 7.5, nota2 = 8.5 WHERE matricula = '2024567546'";
+                
+                //etapa delete
+               //String SQLexcluirAluno = "DELETE FROM aluno WHERE matricula = '1202020456'";
+                
+                String driver = "jdbc:postgresql://127.0.0.1:5432/CSN";
+                Statement st = null;
+               // ResultSet result;
+                try (Connection conn = DriverManager.getConnection(driver, "postgres", "Estacio@123")) {
+                    if (conn != null) {
+                        System.out.println("Connected to the database!");
+                    } else {
+                        System.out.println("Failed to make connection!");
+                    }
+
+            // Criação da tabela
+            /*System.out.println("Criando Tabela, aguarde...");
+            st = conn.createStatement();
+            st.executeUpdate(SQLcriarTabela);
+            System.out.println("Tabela criada com sucesso!");
+            st.close();*/
+
+            // Inserção de dados
+            /*System.out.println("Inserindo dados na Tabela...");
+            st = conn.createStatement();
+            st.executeUpdate(SQLInserirAluno);
+            System.out.println("Dados inseridos!");
+            st.close();*/
+
+            // Consulta de dados
+            /*System.out.println("Consultando dados na Tabela...");
+            st = conn.createStatement();
+            String SQLconsultarDados = "SELECT matricula, nome, ano_escolar FROM aluno";
+            result = st.executeQuery(SQLconsultarDados);
+            while (result.next()) {
+                System.out.println("----------------------");
+                System.out.println("Matrícula: " + result.getString("matricula"));
+                System.out.println("Aluno: " + result.getString("nome"));
+                System.out.println("Ano: " + result.getString("ano_escolar"));
+            }
+            result.close();
+            st.close();*/
+            //fim do bloco consulta
+            
+            //bloco atualiza dados
+             /*System.out.println("Atualizando dados na Tabela...");
+		st = conn.createStatement();
+		st.executeUpdate(SQLatualizarDados);
+		System.out.println("Dados atualizados!");
+		st.close();
+		conn.close();*/
+            //fim do bloco atualiza dados
+            
+            //bloco excluir dados
+            // Exclusão de dados
+            /*System.out.println("Excluindo dados na Tabela...");
+            st = conn.createStatement();
+            st.executeUpdate(SQLexcluirAluno);
+            System.out.println("Dados excluídos!");
+            st.close();
+            conn.close();*/
+            
+            // Consulta de alunos aprovados
+            /*System.out.println("Consultando alunos aprovados...");
+            st = conn.createStatement();
+            String SQLconsultarAprovados = "SELECT matricula, nome, ano_escolar FROM aluno " +
+                "WHERE (nota1 >= 6.0 OR nota2 >= 6.0 OR nota3 >= 6.0 OR nota4 >= 6.0)";
+            ResultSet result = st.executeQuery(SQLconsultarAprovados);
+            while (result.next()) {
+                System.out.println("----------------------");
+                System.out.println("Matrícula: " + result.getString("matricula"));
+                System.out.println("Aluno: " + result.getString("nome"));
+                System.out.println("Ano: " + result.getString("ano_escolar"));
+            }
+            result.close();
+            st.close();*/
+            
+            // Consulta de alunos reprovados
+            /*System.out.println("Consultando alunos reprovados...");
+            st = conn.createStatement();
+            String SQLconsultarAprovados = "SELECT matricula, nome, ano_escolar FROM aluno " +
+                "WHERE (nota1 < 6.0 OR nota2 < 6.0 OR nota3 < 6.0 OR nota4 < 6.0)";
+            ResultSet result = st.executeQuery(SQLconsultarAprovados);
+            while (result.next()) {
+                System.out.println("----------------------");
+                System.out.println("Matrícula: " + result.getString("matricula"));
+                System.out.println("Aluno: " + result.getString("nome"));
+                System.out.println("Ano: " + result.getString("ano_escolar"));
+            }
+            result.close();
+            st.close()*/
+            
+           // Consulta de notas do aluno
+            /*Scanner scanner = new Scanner(System.in);
+            System.out.print("Digite a matrícula do aluno: ");
+            String matricula = scanner.nextLine();
+            String SQLconsultarNotas = "SELECT nome, nota1, nota2, nota3, nota4 FROM aluno WHERE matricula = '" + matricula + "'";
+            st = conn.createStatement();
+            ResultSet result = st.executeQuery(SQLconsultarNotas);
+
+            if (result.next()) {
+                System.out.println("----------------------");
+                String nome = result.getString("nome");
+                System.out.println("Notas do Aluno (Matrícula: " + matricula + "):");
+                System.out.println("Aluno: " + nome);
+                double nota1 = result.getDouble("nota1");
+                double nota2 = result.getDouble("nota2");
+                double nota3 = result.getDouble("nota3");
+                double nota4 = result.getDouble("nota4");
+                System.out.println("Nota 1: " + nota1);
+                System.out.println("Nota 2: " + nota2);
+                System.out.println("Nota 3: " + nota3);
+                System.out.println("Nota 4: " + nota4);
+
+                double media = (nota1 + nota2 + nota3 + nota4) / 4.0;
+                DecimalFormat decimalFormat = new DecimalFormat("#.#");
+                String mediaFormatada = decimalFormat.format(media);
+                System.out.println("Média: " + mediaFormatada);
+                if (media >= 6.0) {
+                    System.out.println("Situação: Aprovado");
+                } else {
+                    System.out.println("Situação: Reprovado");
+                }
+            } else {
+                System.out.println("Aluno não encontrado.");
+            }
+
+            result.close();
+            st.close();
+            conn.close();*/
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        }
+    }
+}
