@@ -185,7 +185,7 @@ public class CsnBD {
                 
                 String driver = "jdbc:postgresql://127.0.0.1:5432/CSN";
                 Statement st = null;
-               // ResultSet result;
+                //ResultSet result;
                 try (Connection conn = DriverManager.getConnection(driver, "postgres", "Estacio@123")) {
                     if (conn != null) {
                         System.out.println("Connected to the database!");
@@ -258,7 +258,7 @@ public class CsnBD {
             st.close();*/
 	    //fim da etapa de consulta de alunos aprovados
             
-            //Eapa Consulta de alunos reprovados
+            //Etapa Consulta de alunos reprovados
             /*System.out.println("Consultando alunos reprovados...");
             st = conn.createStatement();
             String SQLconsultarAprovados = "SELECT matricula, nome, ano_escolar FROM aluno " +
@@ -312,7 +312,7 @@ public class CsnBD {
             result.close();
             st.close();
             conn.close();*/
-	    /fim da etapa de consulta de notas dos alunos
+	    //fim da etapa de consulta de notas dos alunos
             
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
