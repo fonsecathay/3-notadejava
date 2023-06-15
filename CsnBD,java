@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 
 public class CsnBD {
     public static void main(String[] args) throws SQLException {
-        // Criação da tabela aluno
+        // etapa Criação da tabela aluno
         /*String SQLcriarTabela = "CREATE TABLE aluno (" +
                 "matricula VARCHAR(12) PRIMARY KEY, " +
                 "nome VARCHAR(100), " +
@@ -20,9 +20,10 @@ public class CsnBD {
                 "nota3 DECIMAL(3,1), " +
                 "nota4 DECIMAL(3,1)" +
                 ")";*/
-        // Fim da criação tabela aluno
+        // Fim da etapa criação tabela aluno
         
-        /*String SQLInserirAluno = "INSERT INTO aluno (matricula, nome, ano_escolar, nota1, nota2, nota3, nota4) VALUES " +
+        //etapa inserção de alunos
+      /* String SQLInserirAluno = "INSERT INTO aluno (matricula, nome, ano_escolar, nota1, nota2, nota3, nota4) VALUES " +
                 "('2024567546', 'João Silva', 'JARDIM 1', 8.5, 9.0, 7.5, 9.5), " +
                 "('1465566456', 'Diego Ramos','JARDIM 1', 8.5, 9.0, 7.5, 9.5), " +
                 "('1202020456', 'Diego DELETE','JARDIM 1', 8.5, 9.0, 7.5, 9.5), " +
@@ -174,8 +175,9 @@ public class CsnBD {
                 "('12345789247', 'Maria Oliveira', '3º ANO EM', 8.5, 9.0, 7.5, 9.5), " +
                 "('12345689248', 'João da Silva', '3º ANO EM', 4.5, 9.0, 7.5, 9.5), " +
                 "('98765212249', 'Maria Santos', '3º ANO EM', 3.0, 6.5, 8.0, 7.5)";*/
-                
-                //atualizar dados
+                //fim da inserção de alunos.
+        
+                //etapa atualizar dados
                 //String SQLatualizarDados = "UPDATE aluno SET nota1 = 7.5, nota2 = 8.5 WHERE matricula = '2024567546'";
                 
                 //etapa delete
@@ -191,21 +193,23 @@ public class CsnBD {
                         System.out.println("Failed to make connection!");
                     }
 
-            // Criação da tabela
+            // Etapa Criação da tabela
             /*System.out.println("Criando Tabela, aguarde...");
             st = conn.createStatement();
             st.executeUpdate(SQLcriarTabela);
             System.out.println("Tabela criada com sucesso!");
             st.close();*/
+	    //fim da etapa criação de tabelas
 
-            // Inserção de dados
-            /*System.out.println("Inserindo dados na Tabela...");
+            //Etapa Inserção de dados
+            System.out.println("Inserindo dados na Tabela...");
             st = conn.createStatement();
             st.executeUpdate(SQLInserirAluno);
             System.out.println("Dados inseridos!");
-            st.close();*/
+            st.close();
+	    //fim da etapa inserção de dados
 
-            // Consulta de dados
+            //Etapa Consulta de dados
             /*System.out.println("Consultando dados na Tabela...");
             st = conn.createStatement();
             String SQLconsultarDados = "SELECT matricula, nome, ano_escolar FROM aluno";
@@ -218,27 +222,27 @@ public class CsnBD {
             }
             result.close();
             st.close();*/
-            //fim do bloco consulta
+            //fim da etapa consulta de dados
             
-            //bloco atualiza dados
+            //Etapa atualiza dados
              /*System.out.println("Atualizando dados na Tabela...");
 		st = conn.createStatement();
 		st.executeUpdate(SQLatualizarDados);
 		System.out.println("Dados atualizados!");
 		st.close();
 		conn.close();*/
-            //fim do bloco atualiza dados
+            //fim da etapa atualiza dados
             
-            //bloco excluir dados
-            // Exclusão de dados
+            //Etapa excluir dados
             /*System.out.println("Excluindo dados na Tabela...");
             st = conn.createStatement();
             st.executeUpdate(SQLexcluirAluno);
             System.out.println("Dados excluídos!");
             st.close();
             conn.close();*/
+	    //fim da etapa de exclusão de dados
             
-            // Consulta de alunos aprovados
+            // Etapa Consulta de alunos aprovados
             /*System.out.println("Consultando alunos aprovados...");
             st = conn.createStatement();
             String SQLconsultarAprovados = "SELECT matricula, nome, ano_escolar FROM aluno " +
@@ -252,8 +256,9 @@ public class CsnBD {
             }
             result.close();
             st.close();*/
+	    //fim da etapa de consulta de alunos aprovados
             
-            // Consulta de alunos reprovados
+            //Eapa Consulta de alunos reprovados
             /*System.out.println("Consultando alunos reprovados...");
             st = conn.createStatement();
             String SQLconsultarAprovados = "SELECT matricula, nome, ano_escolar FROM aluno " +
@@ -267,8 +272,9 @@ public class CsnBD {
             }
             result.close();
             st.close()*/
-            
-           // Consulta de notas do aluno
+	    //fim da etapa de consulta de alunos reprovados
+	    
+           //Etapa Consulta de notas do aluno
             /*Scanner scanner = new Scanner(System.in);
             System.out.print("Digite a matrícula do aluno: ");
             String matricula = scanner.nextLine();
@@ -306,6 +312,8 @@ public class CsnBD {
             result.close();
             st.close();
             conn.close();*/
+	    /fim da etapa de consulta de notas dos alunos
+            
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         }
